@@ -3,51 +3,56 @@ console.log("HERE!!")
 // getElementsByTagName
 // select all p tags from our HTML document and create a collection
 
-let paragraphs = document.getElementsByTagName("p")
-// log paragraphs
-// console.log(paragraphs);
+let paragraphs = document.getElementsByTagName("p");
+console.log(paragraphs);
 
 // change the color and font family of all the p tags 
 // using a for loop
 for(let i = 0; i < paragraphs.length; i++) {
-    paragraphs[i].style.color = "green";
+    paragraphs[i].style.color = "blue";
     paragraphs[i].style.fontFamily = "aria";
+    paragraphs[i].style.fontStyle = "italic";
 
 }
 
-// TODO: 
-// Add more h1 elements
-// Use getElementsByTagName to change some of their CSS settings
+// // TODO: 
+// // Add more h1 elements
+// // Use getElementsByTagName to change some of their CSS settings
 
 
 
 
-// Classes
-// getElementsByClassName
+// // Classes -----------
+// // getElementsByClassName
 
-// select all elements in our HTML document with the class name "my-class"
+// // select all elements in our HTML document with the class name "my-class"
 let myClass = document.getElementsByClassName("my-class")
-// console.log(myClass);
+console.log(myClass);
 
 // loop through my-class elements and 
 // change their font color and font style
 for (let i=0; i < myClass.length; i++){
+
     myClass[i].style.color = "red";
     myClass[i].style.fontStyle ="italic";
+
 }
 
-// Nested Elements
 
+
+
+// Nested Elements-----------------------
 const todo = document.getElementById("todo");
-// console.log(todo);
+console.log(todo);
 
 const todoItems = todo.getElementsByTagName("li");
+// document.getElementById("todo").getElementsByTagName("li")
 
 
 for (let i=0; i < todoItems.length; i++){
 
     const items = todoItems[i];
-    items.textContent =items.textContent + "📌";
+    items.textContent =items.textContent + ":shopping_trolley:";
 }
 
 // TODO: Add a new HTML list with a different id
@@ -59,7 +64,7 @@ for (let i=0; i < todoItems.length; i++){
 
 
 
-// Event Listeners
+// // Event Listeners ----------------
 // addEventListener()
 const calculateButton = document.getElementById("calculateButton");
 const resultElement = document.getElementById("result");
@@ -70,25 +75,34 @@ calculateButton.addEventListener("click", function() {
     const number2 = document.getElementById("number2").value;
 
     // if / else statement to check whether either of the numbers entered is empty /
-    //  or isn't a number! This is what Nan means.
+    //  or isn't a number! This is what Nan means. NaN - Not a Number
+    
 
     if (isNaN(number1) || isNaN(number2)) {
         resultElement.textContent = "Please enter valid numbers!";
         // else, multiply the two numbers.
+      } else if(number1 === "" || number2 === "") {
+        resultElement.textContent = "Please enter valid numbers!";
+
       } else {
         let result = number1 * number2;
         resultElement.textContent = "Answer: " + "✨" + result + "✨";
       }
 })
 
+
 // TODO: Add an event listener to the new button that clears the result when it’s clicked.
 // hint: when the clear button is clicked, set the button textContent = '';
+const clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", function() {
+    resultElement.textContent = "";
+})
 
 
 
 
 
-// TIMERS
+// // TIMERS ----------------
 // setTimeout()
 const list = document.getElementById("fruits");
 const listItems = list.getElementsByTagName("li");
@@ -96,19 +110,28 @@ const listItems = list.getElementsByTagName("li");
 // Find the index of the last item
 let index = listItems.length - 1;
 
+
 function showNextItem() {
     if (index >=0) {
         listItems[index].style.visibility = "visible"
         index--; // count down
 
-        setTimeout(showNextItem, 2000); // 1 sec delay
+        setTimeout(showNextItem, 2000); // 2 sec delay
+    }else {
+        setTimeout(showEmoji, 500)
     }
+    
 }
 
 showNextItem();
 
+
 // TODO: Add a function to add a gold star emoji to the web page 
 // and call that function 0.5 seconds after revealing the whole list. 
+function showEmoji() {
+    const star = document.getElementById("starEmoji");
+    star.style.visibility = "visible";
 
+}
 
 // Local Storage
